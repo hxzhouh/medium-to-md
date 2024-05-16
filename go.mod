@@ -1,9 +1,6 @@
 module github.com/hxzhouh/medium-to-md.git
 
 go 1.22.3
-
-require github.com/hxzhouh/html-to-markdown v1.5.0
-
 require (
 	github.com/JohannesKaufmann/html-to-markdown v1.5.0 // indirect
 	github.com/PuerkitoBio/goquery v1.8.1 // indirect

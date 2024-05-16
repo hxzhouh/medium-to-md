@@ -1,7 +1,7 @@
 package convert
 
 import (
-	md "github.com/hxzhouh/html-to-markdown"
+	md "github.com/JohannesKaufmann/html-to-markdown"
 	"regexp"
 	"strings"
 	"time"
