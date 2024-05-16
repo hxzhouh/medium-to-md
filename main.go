@@ -16,10 +16,12 @@ import (
 
 var filesize int
 var file string
+var templateFile string
 
 func init() {
 	flag.IntVar(&filesize, "size", 5000, "file size")
 	flag.StringVar(&file, "file", "", "file")
+	flag.StringVar(&templateFile, "template", "template.md", "template file")
 	flag.Parse()
 }
 
@@ -50,7 +52,7 @@ func main() {
 			posts = append(posts, post)
 		}
 	}
-	tmpl, err := template.New("").Parse(mdTemplate)
+	tmpl, err := template.New("template.md").ParseFiles(templateFile)
 	for _, v := range posts {
 		err = os.MkdirAll(filepath.Dir(v.FileName), os.ModePerm)
 		if err != nil {
@@ -65,25 +67,12 @@ func main() {
 		if err != nil {
 			log.Println("create file: ", v.FileName)
 		}
-		err = tmpl.Execute(f, v)
+		err = tmpl.ExecuteTemplate(f, templateFile, v)
 		if err != nil {
-			log.Fatalf("写入文件失败: %v", err)
+			log.Fatalf("wirte file: %v", err)
 		}
 	}
 }
-
-var mdTemplate = `
----
-title: {{ $.Title }}
-tags: 
-categories: 
-  - blog
-description: {{ $.SubTitle }}
-Author: {{ $.Author }}
-date: {{ $.CreateAt }}
----
-{{ $.Content }}
-`
 
 // UnzipToMemory 解压缩 zip 文件到内存
 func UnzipToMemory(src string) (map[string][]byte, error) {

@@ -1,9 +1,7 @@
 package convert
 
 import (
-	"fmt"
 	md "github.com/hxzhouh/html-to-markdown"
-	"log"
 	"regexp"
 	"strings"
 	"time"
@@ -28,7 +26,6 @@ type Post struct {
 }
 
 func Convert(name string, content []byte) (*Post, error) {
-	log.Println("convert ", name)
 	temp, err := converter.ConvertString(string(content))
 	if err != nil {
 		return nil, err
@@ -39,7 +36,6 @@ func Convert(name string, content []byte) (*Post, error) {
 	post.Author = "huizhou92"
 	post.Title = strings.Split(temp, "\n")[0]
 	post.SubTitle = strings.Split(temp, "\n")[1]
-	log.Println(fmt.Sprintf("convert %s success, time= %v", name, post.CreateAt))
 	post.SourceUrl = getSourceHttpLink(temp)
 	return post, nil
 }
