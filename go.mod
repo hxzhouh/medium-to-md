@@ -10,5 +10,3 @@ require (
 	github.com/andybalholm/cascadia v1.3.1 // indirect
 	golang.org/x/net v0.19.0 // indirect
 )
-
-replace github.com/hxzhouh/html-to-markdown v1.5.0 => /Users/hxzhouh/workspace/github/html-to-markdown
